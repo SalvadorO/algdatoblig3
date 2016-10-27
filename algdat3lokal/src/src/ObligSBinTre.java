@@ -151,9 +151,8 @@ public class ObligSBinTre<T> implements Beholder<T>
   
   private static <T> Node<T> nesteInorden(Node<T> p)
   {
-      
       int temp = 0;
-    while(p.venstre != null) nesteInorden(p.venstre); temp++;
+    while(p.venstre != null) p = p.venstre; temp++;
     if(p.høyre != null) nesteInorden(p.høyre);
     
     else if(p.høyre == null)
@@ -166,7 +165,7 @@ public class ObligSBinTre<T> implements Beholder<T>
   @Override
   public String toString()
   {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
+    Stringjoiner sj = new StringJoiner(",", "[", "]");
   }
   
   public String omvendtString()
