@@ -54,6 +54,22 @@ public class ObligSBinTre<T> implements Beholder<T>
   @Override
    public final boolean leggInn(T verdi)    // skal ligge i class SBinTre
   {
+    
+    Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
+
+    Node<T> p = rot, q = null;               // p starter i roten
+    int cmp = 0;                             // hjelpevariabel
+
+    while (p != null)       // fortsetter til p er ute av treet
+    {
+      q = p;                                 // q er forelder til p
+      cmp = comp.compare(verdi,p.verdi);     // bruker komparatoren
+      p = cmp < 0 ? p.venstre : p.høyre;     // flytter p
+    }
+
+    // p er nå null, dvs. ute av treet, q er den siste vi passerte
+
+    p = new Node<>(verdi,q);                   // oppretter en ny node
     Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
 
     Node<T> p = rot, q = null;               // p starter i roten
@@ -77,6 +93,7 @@ public class ObligSBinTre<T> implements Beholder<T>
     antall++;                                // én verdi mer i treet
     return true;                             // vellykket innlegging
   }
+  
   
   @Override
   public boolean inneholder(T verdi)
