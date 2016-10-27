@@ -12,7 +12,7 @@ package src;
  */
  import java.util.*;
   import java.util.function.Predicate;
-//--------------------------------------------------------------------------------------------
+//---------------------------------------------
   public interface Beholder<T> extends Iterable<T>  // ny versjon
   {
     public boolean leggInn(T verdi);    // legger inn verdi i beholderen
