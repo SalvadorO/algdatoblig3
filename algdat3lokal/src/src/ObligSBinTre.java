@@ -151,21 +151,30 @@ public class ObligSBinTre<T> implements Beholder<T>
   
   private static <T> Node<T> nesteInorden(Node<T> p)
   {
-      int temp = 0;
+    int temp = 0;
+    
     while(p.venstre != null) p = p.venstre; temp++;
+    
     if(p.høyre != null) nesteInorden(p.høyre);
     
-    else if(p.høyre == null)
-            return null;
     else if (p.venstre == null && p.høyre == null && p.forelder.høyre !=null && temp==0) nesteInorden(p.forelder.høyre);
+    
     return p;
+    
   }
   
   
   @Override
   public String toString()
   {
-    Stringjoiner sj = new StringJoiner(",", "[", "]");
+    StringJoiner sj = new StringJoiner(",", "[", "]");
+      Node<T> p = ObligSBinTre.nesteInorden(rot);
+    sj.add(ObligSBinTre.nesteInorden(p));
+    sj.toString();
+    String a = sj.toString();
+      System.out.println(a);
+   return a;
+      
   }
   
   public String omvendtString()
@@ -235,4 +244,5 @@ public class ObligSBinTre<T> implements Beholder<T>
 
   } // BladnodeIterator
 
+  
 } // ObligSBinTre
