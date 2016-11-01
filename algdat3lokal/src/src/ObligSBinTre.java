@@ -112,10 +112,10 @@ public class ObligSBinTre<T> implements Beholder<T>
   {
     return antall;
   }
-  
-  public int antall(T verdi)
-  {
-          if (!inneholder(verdi)){
+ 
+  public int antall(T verdi){
+      
+    if (!inneholder(verdi)){
         return 0;
     }
     Node<T> p = rot;
@@ -123,9 +123,10 @@ public class ObligSBinTre<T> implements Beholder<T>
                                // hjelpevariabe
     while (p != null){
         int cmp = comp.compare(verdi,p.verdi);
+       
         if (cmp<0) p=p.venstre;
     
-    else{
+        else{
             if (cmp ==0){
             teller++;}
             p=p.høyre;
