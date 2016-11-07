@@ -11,7 +11,7 @@ package src;
  * @author Salvador
  */
 import java.util.*;
-
+//ksdfjlksajfø
 public class ObligSBinTre<T> implements Beholder<T>
 {
   private static final class Node<T>   // en indre nodeklasse
