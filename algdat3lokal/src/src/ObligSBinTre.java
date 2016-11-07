@@ -145,7 +145,8 @@ public class ObligSBinTre<T> implements Beholder<T>
   @Override
   public void nullstill()
   {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
+      rot = null;
+    
   }
   
   private static <T> Node<T> nesteInorden(Node<T> p)
@@ -168,10 +169,11 @@ public class ObligSBinTre<T> implements Beholder<T>
   {
     throw new UnsupportedOperationException("Ikke kodet ennå!");
   }
-  
-  public String lengstGren()
-  {
+
+  public String lengstGren() {
+      
     throw new UnsupportedOperationException("Ikke kodet ennå!");
+    
   }
   
   public String[] grener()
