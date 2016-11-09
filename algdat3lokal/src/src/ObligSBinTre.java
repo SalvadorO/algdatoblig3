@@ -160,16 +160,13 @@ public class ObligSBinTre<T> implements Beholder<T>
     else if(p.forelder != null && p.forelder.venstre == p){
             return p.forelder;
             }
-
     else  // mÂ gÂ oppover i treet
     {
       while (p.forelder != null && p.forelder.høyre == p){
         p = p.forelder;
       }
-      
       return p.forelder;
     }
-
   }
   
   @Override
@@ -180,29 +177,52 @@ public class ObligSBinTre<T> implements Beholder<T>
     s.append("[");
     if (!tom()) {
         Node<T> p = rot;
-        
         while(p.venstre != null){
             p = p.venstre;
         }
-        
-        s.append((rot));
+        s.append(p.verdi);
         while (nesteInorden(p) != null) {
             s.append(", ");
             s.append(nesteInorden(p).verdi);
             p = nesteInorden(p);
         }
-        
     }
-  
     s.append("]");
     return s.toString();
   }
   
-
-  
   public String omvendtString()
   {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
+    ArrayDeque<Node<T>> stakk = new ArrayDeque<>();
+    
+    if (!tom()) {
+        Node<T> p = rot;
+        while(p.venstre != null){
+            p = p.venstre;
+        }
+        stakk.push(p);
+        while (nesteInorden(p) != null) {
+            stakk.push(nesteInorden(p));
+            p = nesteInorden(p);
+        }
+    }else{
+        return "[]";
+    }
+    StringBuilder s = new StringBuilder();
+    s.append("[");
+    
+    while(!stakk.isEmpty()){
+        
+        s.append(stakk.poll().verdi);
+        s.append(", ");
+    }
+    
+    s.deleteCharAt(s.length()-1);
+    
+    s.deleteCharAt(s.length()-1);
+    s.append("]");
+    
+    return s.toString();
   }
   
   public String høyreGren()
