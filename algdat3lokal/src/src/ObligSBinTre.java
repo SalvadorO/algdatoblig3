@@ -149,49 +149,55 @@ public class ObligSBinTre<T> implements Beholder<T>
     
   }
   
-        public static <T> Node<T> nesteInorden(Node<T> p) {
-
-            if (p.høyre != null) {
-                p = p.høyre;
-                while (p.venstre != null) {
-                    p = p.venstre;
-                }
-                return p;
-
-            } else if (p.forelder != null && p.forelder.venstre == p) {
-                return p.forelder;
-
-            } else {
-                while (p.forelder != null && p.forelder.høyre == p) {
-                    p = p.forelder;
-                }
-                return p.forelder;
-
-
-            }
-            
-        }
-
-
-    public String toString()
+  private static <T> Node<T> nesteInorden(Node<T> p)
+  {
+    if(p.høyre != null)  // p har h¯yre barn
     {
-        StringJoiner sj = new StringJoiner(", ", "[", "]");
-        
-        if (tom()) return "[]";
-        Node<T> p = rot;
+      p=p.høyre;
+      while (p.venstre != null) p = p.venstre; //f¯rste inorden
+      return p;
+    }
+    else if(p.forelder != null && p.forelder.venstre == p){
+            return p.forelder;
+            }
 
-        while ( p.venstre != null){
+    else  // mÂ gÂ oppover i treet
+    {
+      while (p.forelder != null && p.forelder.høyre == p){
+        p = p.forelder;
+      }
+      
+      return p.forelder;
+    }
+
+  }
+  
+  @Override
+  public String toString()
+  {
+
+    StringBuilder s = new StringBuilder();
+    s.append("[");
+    if (!tom()) {
+        Node<T> p = rot;
+        
+        while(p.venstre != null){
             p = p.venstre;
         }
-       sj.add(p.verdi.toString());
-
-        for (int i = 0; i < antall-1; i++){
+        
+        s.append((rot));
+        while (nesteInorden(p) != null) {
+            s.append(", ");
+            s.append(nesteInorden(p).verdi);
             p = nesteInorden(p);
-            sj.add(p.verdi.toString());
-
         }
-        return sj.toString();
+        
     }
+  
+    s.append("]");
+    return s.toString();
+  }
+  
 
   
   public String omvendtString()
